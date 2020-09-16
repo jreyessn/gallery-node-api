@@ -10,7 +10,7 @@ async function index(req: Request, res: Response) : Promise <Response> {
 	let result = await Photo.find();
 
 	result = result.map(item => {
-		item.imagePathComplete = req.protocol + '://' + req.hostname + ':3000' + '/' +item.imagePath;
+		item.imagePathComplete = req.protocol + '://' + req.hostname + ':3001' + '/' +item.imagePath;
 
 		return item;
 	})
@@ -47,6 +47,9 @@ async function create(req: Request, res: Response) : Promise <Response> {
 // Aun no actualiza. Verificar
 
 async function update(req: Request, res: Response) : Promise <Response> {
+	
+	console.log(req.params, req.body)
+
 	const { id }  = req.params;
 	const { title, description } = req.body;
 
@@ -68,7 +71,9 @@ async function update(req: Request, res: Response) : Promise <Response> {
 
 async function show(req: Request, res: Response) : Promise <Response> {
 	const { id }  = req.params;
-	const item    = await Photo.findById(id);
+	let item: any  = await Photo.findById(id);
+
+	item.imagePathComplete = req.protocol + '://' + req.hostname + ':3001' + '/' +item.imagePath;
 
 	return res.json(item);
 }

@@ -8,7 +8,7 @@ const app = express();
 
 // Settings 
 
-app.set('port', 3000)
+app.set('port', 3001)
 
 // Middlewares
 
@@ -22,8 +22,8 @@ app.use(cors({
 
 // Routes
 
-app.use('/api', Router);
 app.use(express.json());
+app.use('/api', Router);
 
 // Almacenar y acceder a los archivos publicos
 
